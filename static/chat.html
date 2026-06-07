@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LMS ChatBot — Chat</title>
+  <link rel="stylesheet" href="/static/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+  <script>
+    // Prevent flash of wrong theme
+    (function() {
+      const t = localStorage.getItem('lms_theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="nav-icon">📚</span>
+      <span class="nav-title">LMS ChatBot</span>
+    </div>
+    <div class="nav-links">
+      <a href="/train" class="nav-link">Train</a>
+      <a href="/chat" class="nav-link active">Chat</a>
+      <span class="doc-badge">{{ doc_count }} doc{{ 's' if doc_count != 1 else '' }}</span>
+      <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">
+        <span class="toggle-icon">🌙</span>
+        <span class="toggle-label">Dark</span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="chat-wrapper">
+
+    <!-- Chat Window -->
+    <div class="chat-window" id="chatWindow">
+
+      <!-- Welcome message -->
+      <div class="message bot-message">
+        <div class="message-avatar">🤖</div>
+        <div class="message-content">
+          <p>Hello! I'm your LMS assistant <strong>PY</strong>. Ask me anything about your uploaded documents — or any general topic, and I'll search the web.</p>
+          <p class="message-hint">
+            <span class="status-dot online" id="statusDot"></span>
+            <span id="statusLabel">Checking…</span>
+            · Streaming answers · Click any suggestion below to get started
+          </p>
+        </div>
+      </div>
+
+      <!-- Starter suggestion chips are injected here by script.js -->
+
+    </div>
+
+    <!-- Input Area -->
+    <div class="chat-input-area">
+      <div class="input-wrap">
+        <input
+          type="text"
+          id="questionInput"
+          class="chat-input"
+          placeholder="Ask anything about your documents or the web…"
+          autocomplete="off"
+        />
+        <button class="btn-send" id="sendBtn">
+          Send <span>➤</span>
+        </button>
+      </div>
+      <p class="input-hint">Answers from your documents · Wikipedia · DuckDuckGo — 100% local &amp; free</p>
+    </div>
+
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
